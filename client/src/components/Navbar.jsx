@@ -17,7 +17,6 @@ const Navbar = () => {
   return (
     <div className="shadow py-2">
       <div className="container px-4 2xl:px-20 mx-auto flex justify-between items-center">
-        
         {/* Company Logo */}
         <div
           style={{
@@ -54,7 +53,7 @@ const Navbar = () => {
               onClick={(e) => setShowRecruiterLogin(true)}
               className="border border-blue-600 text-blue-600 px-6 sm:px-9 py-2 rounded-full shadow-md transition-transform duration-200 hover:scale-105"
             >
-              Recruiter
+              Recruiter Login
             </button>
             <button
               onClick={() => openSignIn()}

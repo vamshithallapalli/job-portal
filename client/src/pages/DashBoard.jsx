@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const DashBoard = () => {
   const navigate = useNavigate();
+
+  const { companyData, setCompanyData, setCompanyToken } =
+    useContext(AppContext);
+
+  //function  to logout for company
+  const logout = () => {
+    setCompanyToken(null);
+    localStorage.removeItem("companyToken");
+    setCompanyData(null);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (companyData) {
+      navigate("/dashboard/manage-job");
+    }
+  }, [companyData]);
+
   const logoUrl =
     "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4bc.png"; // Replace with your logo URL or local path
 
@@ -36,23 +55,31 @@ const DashBoard = () => {
               JobPortal
             </span>
           </div>
-
-          <div className="flex items-center gap-3">
-            <p className="max-sm:hidden">Welcome, GreatStack</p>
-            <div className="relative group">
-              <img
-                className="w-8 border rounded-full"
-                src={assets.company_icon}
-                alt=""
-              />
-              <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded-full pt-12">
-                <ul className="list-none m-0 p-2 bg-white border rounded-md text-sm">
-                  <li className="py-1 px-2 cursor-pointer pr-10">MyProfile</li>
-                  <li className="py-1 px-2 cursor-pointer pr-10">Logout</li>
-                </ul>
+          {companyData && (
+            <div className="flex items-center gap-3">
+              <p className="max-sm:hidden">Welcome, {companyData.name}!</p>
+              <div className="relative group">
+                <img
+                  className="w-8 border rounded-full"
+                  src={companyData.image}
+                  alt=""
+                />
+                <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded-full pt-12">
+                  <ul className="list-none m-0 p-2 bg-white border rounded-md text-sm">
+                    {/* <li className="py-1 px-2 cursor-pointer pr-10">
+                      MyProfile
+                    </li> */}
+                    <li
+                      onClick={logout}
+                      className="py-1 px-2 cursor-pointer pr-10"
+                    >
+                      Logout
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
