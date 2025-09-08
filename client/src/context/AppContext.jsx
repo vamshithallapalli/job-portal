@@ -58,23 +58,23 @@ export const AppContextProvider = (props) => {
     }
   };
 
-  // function to fetch user data
-  const fetchUserData = async () => {
-    try {
-      const token = await getToken();
-      const { data } = await axios.get(`${backendUrl}/api/users/user`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  // // function to fetch user data
+  // const fetchUserData = async () => {
+  //   try {
+  //     const token = await getToken();
+  //     const { data } = await axios.get(`${backendUrl}/api/users/user`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
 
-      if (data.success) {
-        setUserData(data.user);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  //     if (data.success) {
+  //       setUserData(data.user);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
 
   // Function to fetch user's applied applications data
   const fetchUserApplications = async () => {
@@ -111,12 +111,12 @@ export const AppContextProvider = (props) => {
     }
   }, [companyToken]);
 
-  useEffect(() => {
-    if (user) {
-      fetchUserData();
-      fetchUserApplications();
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchUserData();
+  //     fetchUserApplications();
+  //   }
+  // }, [user]);
 
   const value = {
     setSearchFilter,
